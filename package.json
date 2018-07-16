@@ -1,6 +1,6 @@
 {
   "name": "@netology-group/webcomponents-ui",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "",
   "main": "lib/index.mjs",
   "scripts": {
@@ -17,7 +17,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@netology-group/webcomponents-utils": "0.0.4",
+    "@netology-group/webcomponents-utils": "^0.1.0",
     "@polymer/lit-element": "^0.5.2"
   },
   "devDependencies": {
