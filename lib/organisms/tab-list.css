@@ -1,0 +1,15 @@
+:host,
+:root {
+  height: 100%;
+}
+
+.tab-items {
+  background-color: var(--tab-bg-color, var(--theme-color-alabaster, #f8f8f8));
+  min-height: 300px;
+  height: calc(100% - 44px);
+}
+
+.tab-bars,
+.tab-items {
+  min-width: 250px;
+}
