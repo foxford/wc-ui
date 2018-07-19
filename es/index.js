@@ -2037,18 +2037,35 @@ const withStyle = (base, ...styles) => props => html$1`
   ${base(props)}
 `;
 
-const styles = `
-  .tab-bar {
-    display: inline-block;
-    padding: 14px 20px;
+function styleInject(css, ref) {
+  if ( ref === void 0 ) ref = {};
+  var insertAt = ref.insertAt;
+
+  if (!css || typeof document === 'undefined') { return; }
+
+  var head = document.head || document.getElementsByTagName('head')[0];
+  var style = document.createElement('style');
+  style.type = 'text/css';
+
+  if (insertAt === 'top') {
+    if (head.firstChild) {
+      head.insertBefore(style, head.firstChild);
+    } else {
+      head.appendChild(style);
+    }
+  } else {
+    head.appendChild(style);
   }
-  .tab-bar.active {
-    background-color: var(--theme-color-alabaster, #f8f8f8);
+
+  if (style.styleSheet) {
+    style.styleSheet.cssText = css;
+  } else {
+    style.appendChild(document.createTextNode(css));
   }
-  .tab-bar:not(.active){
-    cursor: pointer;
-  }
-`;
+}
+
+var css = ".tab-bar {\n  display: inline-block;\n  padding: 14px 20px;\n}\n\n.tab-bar.active {\n  background-color: #f8f8f8;\n  background-color: var(--tab-bg-color, var(--theme-color-alabaster, #f8f8f8));\n}\n\n.tab-bar:not(.active) {\n  cursor: pointer;\n}\n";
+styleInject(css);
 
 const tabBar = ({
   active,
@@ -2065,7 +2082,7 @@ const tabBar = ({
   </span>
 `;
 
-var TabBar = withStyle(tabBar, styles);
+var tabBar$1 = withStyle(tabBar, css);
 
 const withStyle$1 = (base, ...styles) => class extends base {
   _renderStyles (...argv) { // eslint-disable-line class-methods-use-this
@@ -2080,11 +2097,8 @@ const withStyle$1 = (base, ...styles) => class extends base {
   }
 };
 
-const styles$1 = `
-  :host{
-    height:100%;
-  }
-`;
+var css$1 = ":host {\n  height: 100%;\n}\n";
+styleInject(css$1);
 
 class TabItem extends LitElement {
   static get properties () {
@@ -2102,24 +2116,13 @@ class TabItem extends LitElement {
   }
 }
 
-var tabItem = withStyle$1(TabItem, styles$1);
+var tabItem = withStyle$1(TabItem, css$1);
+
+var css$2 = ":host,\n:root {\n  height: 100%;\n}\n\n.tab-items {\n  background-color: #f8f8f8;\n  background-color: var(--tab-bg-color, var(--theme-color-alabaster, #f8f8f8));\n  min-height: 300px;\n  height: calc(100% - 44px);\n}\n\n.tab-bars,\n.tab-items {\n  min-width: 250px;\n}\n";
+styleInject(css$2);
 
 const isSelected = (el, selected) => el.getAttribute('title') === selected;
 const selectTabItem = (list, selected) => list.map(it => isSelected(it, selected) ? it : null);
-
-const styles$2 = `
-  :host, :root{
-    height:100%;
-  }
-  .tab-items {
-    background-color: var(--theme-color-alabaster, #f8f8f8);
-    min-height: 300px;
-    height: calc(100% - 44px);
-  }
-  .tab-bars, .tab-items {
-    min-width: 250px;
-  }
-`;
 
 class TabList extends LitElement {
   static get properties () {
@@ -2148,7 +2151,7 @@ class TabList extends LitElement {
   __renderBar (selected, it) {
     const name = it.getAttribute('title');
 
-    return TabBar({
+    return tabBar({
       active: selected === name,
       name,
       onClick: e => this._handleTabSelect(e),
@@ -2177,6 +2180,6 @@ class TabList extends LitElement {
   }
 }
 
-var tabList = withStyle$1(TabList, styles$2);
+var tabList = withStyle$1(TabList, css$2, css);
 
-export { tabList as TabList, tabItem as TabItem, TabBar };
+export { tabList as TabList, tabItem as TabItem, tabBar$1 as TabBar };
