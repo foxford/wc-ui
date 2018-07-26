@@ -3,8 +3,5 @@
   "parser": "babel-eslint",
   "rules":{
     "class-methods-use-this": 0
-  },
-  "globals": {
-    "customElements": true
   }
 }

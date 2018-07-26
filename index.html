@@ -7,11 +7,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-  <script type="module">
-    import { TabList, TabItem } from './es/index.js';
-
-    window.customElements.define('tab-list', TabList);
-    window.customElements.define('tab-item', TabItem);
+  <script>if (!window.customElements) { document.write('<!--'); }</script>
+  <script type="text/javascript" src="public/node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js"></script>
+  <!--! do not remove -->
+  <script src="dist/polyfill.js"></script>
+  <script src="dist/index.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded',  function()  {
+      window.customElements.define('tab-list', window.WCUI.TabList);
+      window.customElements.define('tab-item', window.WCUI.TabItem);
+    })
   </script>
   <h2>Tabs</h2>
   <tab-list selected="Tab 1">

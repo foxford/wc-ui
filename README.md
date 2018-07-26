@@ -1,8 +1,32 @@
-# webcomponents-ui components
+## Usage
 
-## Tabs
+### Define module
 
-### Tabs with generated bars
+#### ES
+```html
+  <script type="module">
+    import { TabList, TabItem } from './es/index.js';
+    window.customElements.define('tab-list', TabList);
+    window.customElements.define('tab-item', TabItem);
+  </script>
+```
+
+#### UMD
+```html
+<script src="path/to/dist/index.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded',  function()  {
+    window.customElements.define('tab-list', window.WCUI.TabList);
+    window.customElements.define('tab-item', window.WCUI.TabItem);
+  })
+</script>
+```
+
+### In HTML
+
+#### Tabs
+
+##### Tabs with generated bars
 ```html
   <tab-list selected="Tab 1">
     <tab-item title="Tab 1">Tab 1 content</tab-item>
@@ -10,7 +34,7 @@
   </tab-list>
 ```
 
-## Headless tabs
+##### Headless tabs
 ```html
   <tab-list selected="Tab 2" headless>
     <tab-item title="Tab 1">Tab 1 content</tab-item>
