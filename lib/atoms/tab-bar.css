@@ -1,12 +1,12 @@
-.tab-bar {
+.root {
   display: inline-block;
   padding: 14px 20px;
 }
 
-.tab-bar.active {
-  background-color: var(--tab-bg-color, var(--theme-color-alabaster, #f8f8f8));
+.root.active {
+  background-color: var(--tab-bg-color, var(--alabaster, #f8f8f8));
 }
 
-.tab-bar:not(.active) {
+.root:not(.active) {
   cursor: pointer;
 }

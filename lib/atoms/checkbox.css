@@ -1,0 +1,11 @@
+input[type="checkbox"] {
+  background: url('../images/checkbox.svg') no-repeat;
+  cursor: pointer;
+  height: 20px;
+  outline: none;
+  width: 20px;
+}
+
+input[type="checkbox"]:checked {
+  background-image: url('../images/checkbox-checked.svg');
+}

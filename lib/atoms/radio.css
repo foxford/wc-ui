@@ -1,0 +1,21 @@
+.root.root {
+  align-items: end;
+  color: var(--poll-border-color, var(--theme-concrete, #333));
+}
+
+input[type="radio"] {
+  background: url('../images/radio.svg') no-repeat center center;
+  cursor: pointer;
+  height: 20px;
+  outline: none;
+  width: 20px;
+}
+
+input[type="radio"]:checked {
+  background-image: url('../images/radio-checked.svg');
+}
+
+.input.input {
+  display: inline;
+  margin: 0;
+}

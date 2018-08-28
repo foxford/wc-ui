@@ -4,9 +4,9 @@
 }
 
 .tab-items {
-  background-color: var(--tab-bg-color, var(--theme-color-alabaster, #f8f8f8));
-  min-height: 300px;
+  background-color: var(--tab-bg-color, var(--alabaster, #f8f8f8));
   height: calc(100% - 44px);
+  min-height: 300px;
 }
 
 .tab-bars,

@@ -2,21 +2,38 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="X-UA-Compatible" content="IE=11">
   <title>UI</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <script src="./public/node_modules/core-js/client/core.min.js"></script>
+  <script src="./public/node_modules/core-js/client/library.min.js"></script>
+  <script src="./public/node_modules/core-js/client/shim.min.js"></script>
+
+  <script src="./dist/polyfill.js"></script>
+
+  <script type="text/javascript" src="./public/node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+
+  <script>if (!window.customElements) { document.write('<!--'); }</script>
+  <script type="text/javascript" src="./public/node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js"></script>
+  <!--! do not remove -->
+
+  <link href="./public/fonts.css" rel="stylesheet" />
+
+  <script src="./dist/dist.js"></script>
+
+  <script>
+    window.onload = function onLoad(){
+      window.customElements.define('ui-tab-list', window.WCUI.TabList);
+      window.customElements.define('ui-tab-item', window.WCUI.TabItem);
+    }
+  </script>
 </head>
 <body>
-  <script type="module">
-    import { TabList, TabItem } from './es/index.js';
-
-    window.customElements.define('tab-list', TabList);
-    window.customElements.define('tab-item', TabItem);
-  </script>
   <h2>Tabs</h2>
-  <tab-list selected="Tab 1">
-    <tab-item title="Tab 1">Tab 1 content</tab-item>
-    <tab-item title="Tab 2">Tab 2 content</tab-item>
-  </tab-list>
+  <ui-tab-list selected="Tab 1">
+    <ui-tab-item title="Tab 1">Tab 1 content</ui-tab-item>
+    <ui-tab-item title="Tab 2">Tab 2 content</ui-tab-item>
+  </ui-tab-list>
 </body>
 </html>

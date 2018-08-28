@@ -1,45 +1,89 @@
 {
   "name": "@netology-group/wc-ui",
-  "version": "0.2.0",
-  "description": "Baby webcomponents",
-  "main": "lib/index.mjs",
-  "scripts": {
-    "lint": "eslint . --ext .js,.mjs",
-    "test": "npm run lint",
-    "build": "rollup -c",
-    "demo": "http-server . -p ${DEMO_PORT:-9090}",
-    "prepare": "npm run build",
-    "start": "npm run demo"
+  "version": "0.3.0",
+  "description": "UI components",
+  "bugs": {
+    "url": "https://github.com/netology-group/wc-ui/issues"
   },
-  "directories": {
-    "lib": "lib"
+  "repository": {
+    "url": "https://github.com/netology-group/wc-ui"
   },
+  "license": "MIT",
+  "author": "",
   "files": [
     "es",
     "lib"
   ],
-  "repository": {
-    "url": "https://github.com/netology-group/wc-ui"
+  "main": "lib",
+  "directories": {
+    "lib": "lib"
   },
-  "bugs": {
-    "url": "https://github.com/netology-group/wc-ui/issues"
+  "scripts": {
+    "prebuild": "npm run cleanup && npm run build:polyfill && npm run build:es",
+    "build": "SKIPCSS=1 rollup -c rollup.umd.js",
+    "build:es": "rollup -c rollup.es.js",
+    "build:polyfill": "rollup -c rollup.polyfill.js",
+    "cleanup": "rm -rf dist es public/node_modules public/fonts",
+    "demo": "http-server . -p ${DEMO_PORT:-9090}",
+    "eslint": "eslint .",
+    "prepare": "npm run build",
+    "start": "npm run demo",
+    "stylelint": "stylelint lib",
+    "test": "npm run eslint && npm run stylelint"
   },
-  "author": "",
-  "license": "MIT",
+  "stylelint": {
+    "extends": [
+      "stylelint-config-standard"
+    ],
+    "plugins": [
+      "stylelint-order"
+    ],
+    "rules": {
+      "order/order": [
+        "dollar-variables",
+        "custom-properties",
+        "at-variables",
+        "declarations",
+        "rules",
+        "at-rules"
+      ],
+      "order/properties-alphabetical-order": false
+    }
+  },
   "dependencies": {
-    "@netology-group/wc-utils": "^0.1.0",
-    "@polymer/lit-element": "^0.5.2"
+    "@fxf/ui": "github:netology-group/foxford-ui#master",
+    "@netology-group/wc-utils": "github:netology-group/wc-utils#master",
+    "@polymer/lit-element": "^0.5.2",
+    "@webcomponents/webcomponentsjs": "^2.1.0",
+    "core-js": "^2.5.7"
   },
   "devDependencies": {
-    "autoprefixer": "^9.0.0",
+    "autoprefixer": "^9.1.2",
     "babel-cli": "^6.26.0",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-3": "^6.24.1",
     "eslint-config-adequate": "^1.1.1",
+    "node-sass": "^4.9.3",
+    "postcss": "^7.0.2",
+    "postcss-fontpath": "^1.0.0",
+    "postcss-import": "^12.0.0",
     "postcss-preset-env": "^5.2.2",
+    "postcss-url": "^8.0.0",
     "rollup": "^0.62.0",
+    "rollup-plugin-babel": "^3.0.7",
     "rollup-plugin-commonjs": "^9.1.3",
+    "rollup-plugin-copy": "^0.2.3",
+    "rollup-plugin-json": "^3.0.0",
     "rollup-plugin-node-resolve": "^3.3.0",
     "rollup-plugin-postcss": "^1.6.2",
-    "rollup-plugin-svg": "^1.0.1"
+    "rollup-plugin-svg": "^1.0.1",
+    "rollup-plugin-uglify": "^4.0.0",
+    "stylelint": "^9.5.0",
+    "stylelint-config-standard": "^18.2.0",
+    "stylelint-order": "^1.0.0"
   }
 }
